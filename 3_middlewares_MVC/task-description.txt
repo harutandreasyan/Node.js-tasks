@@ -1,0 +1,14 @@
+/*
+    Մշակել հավելված, որն ունի հետևյալ endpoint-երը
+        > POST /users - ավելացնում է նոր user-ի տվյալ users.json-ում
+        > DELETE /users/:id - հեռացնում է տվյալ user-ի ինֆո JSON-ից
+        > GET /users/:id - վերադարձնում է user-ի տվյալները
+        > PUT /users/:id - փոփոխության. է ենթարկում տվյալ user-ի ինֆոն:
+        > POST /products - ավելացնում է նոր ապրանքի տվյալ products.json-ում
+        > DELETE /products/:id - հեռացնում է տվյալ ապրանքի ինֆոն JSON-ից
+        > GET /products/category/:kind - վերադարձնում է :kind կատեգորիային պատկանող ապրանքները
+        > GET /products/:id - վերադարձնում է տվյալ id-ով ապրանքի ինֆոն
+        > PUT /products/:id - փոփոխության. է ենթարկում տվյալ ապրանքի ինֆոն:
+
+    Օգտագործել առանձին router-ներ, controller -ներ և model-ներ:
+*/

@@ -1,0 +1,14 @@
+<h1> Hello {name}</h1>
+<p>you are {age} years old</p>
+
+<div>{name} is learning HTML at the age of {age}.</div>
+<span>Welcome, {name}! Age: {age}</span>
+<p><strong>{name}</strong> has reached <em>{age}</em> years of experience!</p>
+<li>{name} - {age} years old</li>
+<section>
+  <header>{name}'s Profile</header>
+  <p>Age: {age}</p>
+</section>
+<footer>Contact {name}, who is currently {age} years old.</footer>
+<button>Say Hi to {name} ({age})</button>
+<blockquote>{name} once said, "Being {age} is just the beginning."</blockquote>

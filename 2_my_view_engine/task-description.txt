@@ -1,0 +1,16 @@
+/*
+    Express-ում իրականացնել նոր ֆունցկիայի՝ myrender-ի մշակումը
+    օրինակ՝
+
+    function myrender(req, res, file, data){
+    
+    }
+    
+    app.get("/",(req,res)=>{
+        myrender(req, res, "pages/home.vjs", {name:"Ashot", age:28})
+    })
+
+    Արդյունքում render կլինի home.vjs-ը, որն ունի այսպիսի տեսք
+        <h1> Hello {name}</h1>
+        <p>you are {age} years old</p>
+*/
