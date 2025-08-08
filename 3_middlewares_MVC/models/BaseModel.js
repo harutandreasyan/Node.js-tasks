@@ -6,7 +6,7 @@ class BaseModel {
         this.filePath = path.join(__dirname, '../data', filename)
     }
 
-	async readData() {
+    async readData() {
         try {
             const data = await readFile(this.filePath, 'utf-8')
             return JSON.parse(data)

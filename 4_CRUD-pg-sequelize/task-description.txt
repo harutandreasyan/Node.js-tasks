@@ -1,0 +1,7 @@
+/*
+    Մշակել Rest API POST, GET< PUT, DELETE, PATCH մեթոդներով
+    դեպի /users և users/:id
+    
+    Իրականացնել CRUD և վալիդացիա՝ տվյալները պահելով postgresql-ում,
+    Օգտվել sequelize ORM-ից
+*/
