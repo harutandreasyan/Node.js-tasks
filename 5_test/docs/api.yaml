@@ -1,0 +1,191 @@
+openapi: 3.0.0
+info:
+  title: Users & Comments API
+  version: 1.0.0
+  description: API for managing users and their comments
+
+servers:
+  - url: http://localhost:3002
+
+paths:
+  /users:
+    get:
+      summary: Get list of users with optional pagination
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            example: 10
+          description: Number of users to return per page
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            example: 1
+          description: Page number
+      responses:
+        "200":
+          description: List of users
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  users:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UserWithComments'
+
+  /users/{id}:
+    get:
+      summary: Get a user by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: User object
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    $ref: '#/components/schemas/User'
+        "404":
+          description: User not found
+
+  /users/{id}/comments:
+    get:
+      summary: Get all comments of a specific user
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: List of comments
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  userId:
+                    type: integer
+                  totalComments:
+                    type: integer
+                  comments:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Comment'
+        "404":
+          description: User not found
+
+  /comments:
+    post:
+      summary: Create a new comment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - content
+                - userId
+              properties:
+                content:
+                  type: string
+                  example: This is a comment
+                userId:
+                  type: integer
+                  example: 1
+      responses:
+        "201":
+          description: Comment created successfully
+        "400":
+          description: Invalid request
+        "500":
+          description: Server error
+
+  /comments/{id}:
+    delete:
+      summary: Delete a comment by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Deleted comment object
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  comment:
+                    $ref: '#/components/schemas/Comment'
+        "404":
+          description: Comment not found
+        "500":
+          description: Server error
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: John Doe
+        email:
+          type: string
+          example: john@example.com
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    Comment:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        content:
+          type: string
+          example: This is a comment
+        userId:
+          type: integer
+          example: 1
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    UserWithComments:
+      allOf:
+        - $ref: '#/components/schemas/User'
+        - type: object
+          properties:
+            Comments:
+              type: array
+              items:
+                $ref: '#/components/schemas/Comment'
