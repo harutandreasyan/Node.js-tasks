@@ -1,0 +1,82 @@
+/*
+    Task Description:
+    Implement a QueryBuilder-like API for building SQL queries in JavaScript using method chaining.  
+    The API should allow filtering with where(), andWhere(), orWhere(), comparisons like is(), isGreaterThan(), pattern matching with like(), sorting with orderBy(), limiting with limit(), and joining tables with join().  
+    The final query is executed with getAll(). The builder must support correct SQL syntax and chaining rules.
+
+    Example 1:
+    const employees = new EmployeeModel();
+    employees
+      .search()
+      .where("salary").isGreaterThan(40000)
+      .andWhere("department_id").is(4)
+      .andWhere("type", 9)
+      .getAll();
+
+    SQL:
+    SELECT * FROM employees
+    WHERE salary > 40000 AND department_id = 4 AND type = 9;
+
+    Example 2:
+    employees
+      .search()
+      .where("type").is(1)
+      .orWhere("type").is(2)
+      .getAll();
+
+    SQL:
+    SELECT * FROM employees
+    WHERE type = 1 OR type = 2;
+
+    Example 3:
+    employees
+      .search()
+      .orderBy("salary", "DESC")
+      .limit(5)
+      .getAll();
+
+    SQL:
+    SELECT * FROM employees
+    ORDER BY salary DESC
+    LIMIT 5;
+
+    Example 4:
+    employees
+      .search()
+      .where("name").like("John%")
+      .getAll();
+
+    SQL:
+    SELECT * FROM employees
+    WHERE name LIKE 'John%';
+
+    Example 5:
+    employees
+      .search()
+      .where("department_id").is(3)
+      .andWhere("salary").isGreaterThan(30000)
+      .orWhere("type").is(1)
+      .orderBy("salary", "ASC")
+      .limit(10)
+      .getAll();
+
+    SQL:
+    SELECT * FROM employees
+    WHERE (department_id = 3 AND salary > 30000) OR type = 1
+    ORDER BY salary ASC
+    LIMIT 10;
+
+    Example 6:
+    const employees = new EmployeeModel();
+    employees
+      .search()
+      .join("departments", "employees.department_id", "departments.id")
+      .where("departments.name").is("Engineering")
+      .andWhere("employees.salary").isGreaterThan(50000)
+      .getAll();
+
+    SQL:
+    SELECT * FROM employees
+    INNER JOIN departments ON employees.department_id = departments.id
+    WHERE departments.name = 'Engineering' AND employees.salary > 50000;
+*/
