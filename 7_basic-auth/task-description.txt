@@ -1,0 +1,25 @@
+/*
+    Task: Basic Authentication API with PostgreSQL + Sequelize
+
+    Objective:
+     Build a REST API with user authentication using JWT, storing users in PostgreSQL via Sequelize.
+    Requirements
+    Endpoints
+    1. POST /auth/register
+        > Accepts name, surname,username and password.
+        > Validation
+            > password must be strong
+            > username must be unique (you can even use postgres unique constraint
+        > Hash the password using bcrypt.
+        > Store the user in the database.
+
+    2. POST /auth/login
+        > Accepts username and password.
+        > Verify credentials against stored hash.
+        > If valid, return a signed JWT access token.
+        > Token should include an expiration time.
+    
+    3. GET /auth/profile
+        > Protected endpoint (requires JWT in Authorization: Bearer <token>).
+        > Returns the logged-in user’s data (excluding password).
+*/

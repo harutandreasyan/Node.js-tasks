@@ -1,0 +1,89 @@
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    RegisterRequest:
+      type: object
+      required:
+        - name
+        - surname
+        - username
+        - password
+      properties:
+        name:
+          type: string
+          example: Ivan
+        surname:
+          type: string
+          example: Petrov
+        username:
+          type: string
+          example: ivan
+        password:
+          type: string
+          description: "Strong password: min 8 chars, uppercase, lowercase, digit, special"
+          example: StrongP@ssw0rd!
+
+    LoginRequest:
+      type: object
+      required:
+        - username
+        - password
+      properties:
+        username:
+          type: string
+          example: ivan
+        password:
+          type: string
+          example: StrongP@ssw0rd!
+
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: Ivan
+        surname:
+          type: string
+          example: Petrov
+        username:
+          type: string
+          example: ivan
+        createdAt:
+          type: string
+          format: date-time
+          example: "2025-08-12T12:34:56.000Z"
+        updatedAt:
+          type: string
+          format: date-time
+          example: "2025-08-12T12:34:56.000Z"
+
+    RegisterResponse:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/User'
+
+    LoginResponse:
+      type: object
+      properties:
+        accessToken:
+          type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        expiresIn:
+          type: string
+          example: "1h"
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Description of error"

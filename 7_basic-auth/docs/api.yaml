@@ -1,0 +1,14 @@
+openapi: 3.0.3
+info:
+  title: Basic Auth API
+  version: "1.0.0"
+  description: "Authentication API (register, login, profile) using PostgreSQL + Sequelize + JWT"
+servers:
+  - url: http://localhost:4002
+    description: Local development server
+
+components:
+  $ref: './components.yaml'
+
+paths:
+  $ref: './paths/auth.yaml'

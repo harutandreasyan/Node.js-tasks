@@ -1,0 +1,121 @@
+/auth/register:
+  post:
+    tags:
+      - auth
+    summary: Register a new user
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../components.yaml#/components/schemas/RegisterRequest'
+          examples:
+            sample:
+              value:
+                name: Ivan
+                surname: Petrov
+                username: ivan
+                password: StrongP@ssw0rd!
+    responses:
+      '201':
+        description: Created — user registered
+        content:
+          application/json:
+            schema:
+              $ref: '../components.yaml#/components/schemas/RegisterResponse'
+      '400':
+        description: Bad request (validation)
+        content:
+          application/json:
+            schema:
+              $ref: '../components.yaml#/components/schemas/ErrorResponse'
+      '409':
+        description: Username already exists
+        content:
+          application/json:
+            schema:
+              $ref: '../components.yaml#/components/schemas/ErrorResponse'
+      '500':
+        description: Server error
+        content:
+          application/json:
+            schema:
+              $ref: '../components.yaml#/components/schemas/ErrorResponse'
+
+/auth/login:
+  post:
+    tags:
+      - auth
+    summary: Login and receive JWT access token
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '../components.yaml#/components/schemas/LoginRequest'
+          examples:
+            sample:
+              value:
+                username: ivan
+                password: StrongP@ssw0rd!
+    responses:
+      '200':
+        description: Successful authentication
+        content:
+          application/json:
+            schema:
+              $ref: '../components.yaml#/components/schemas/LoginResponse'
+      '400':
+        description: Bad request (missing fields)
+        content:
+          application/json:
+            schema:
+              $ref: '../components.yaml#/components/schemas/ErrorResponse'
+      '401':
+        description: Invalid credentials
+        content:
+          application/json:
+            schema:
+              $ref: '../components.yaml#/components/schemas/ErrorResponse'
+      '500':
+        description: Server error
+        content:
+          application/json:
+            schema:
+              $ref: '../components.yaml#/components/schemas/ErrorResponse'
+
+/auth/profile:
+  get:
+    tags:
+      - auth
+    summary: Get current user's profile (protected)
+    security:
+      - bearerAuth: []
+    responses:
+      '200':
+        description: User profile
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  $ref: '../components.yaml#/components/schemas/User'
+      '401':
+        description: Unauthorized (missing/invalid token)
+        content:
+          application/json:
+            schema:
+              $ref: '../components.yaml#/components/schemas/ErrorResponse'
+      '404':
+        description: User not found
+        content:
+          application/json:
+            schema:
+              $ref: '../components.yaml#/components/schemas/ErrorResponse'
+      '500':
+        description: Server error
+        content:
+          application/json:
+            schema:
+              $ref: '../components.yaml#/components/schemas/ErrorResponse'
